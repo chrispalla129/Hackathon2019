@@ -24,8 +24,12 @@
             <version>3.0.8</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.typesafe.play/play-json -->
-
+        <!-- watson api -->
+        <dependency>
+            <groupId>com.ibm.watson</groupId>
+            <artifactId>ibm-watson</artifactId>
+            <version>8.0.0</version>
+        </dependency>
 
     </dependencies>
 </project>
