@@ -14,6 +14,7 @@ class Item (json: JsValue, user: Users.User) {
     for (store <- stores) if (store("store").as[Int] == user.storeNum) price = store("price").as[Double]
     -2
   }
+
   var ingredients: Array[String] = Json.arr(json("ingredients")).as[Array[String]]
 
   var location: String = {
@@ -21,10 +22,13 @@ class Item (json: JsValue, user: Users.User) {
       user.storeNum.toString + "?api-version=2018-10-18&subscription-key=68527dbd17d345e18b45513c9a60782a"
     val data = Json.parse(scala.io.Source.fromURL(url).mkString)
 
-    val loc = data("locations")
-    var ret = "Aisle Name: " + loc("name")
-    if(loc("aisleSide").toString() != "null") ret += " Aisle Side: " + loc("aisleSide").toString
-    ret += " Shelf Number: " + loc("shelfNumber").toString
-    ret
+    if (data.as[Map[String, JsValue]].contains("error")) "Not in stock"
+    else {
+      val loc = data("locations")
+      var ret = "Aisle Name: " + loc("name")
+      if (loc("aisleSide") != Json.toJson(null)) ret += " Aisle Side: " + loc("aisleSide").toString
+      ret += " Shelf Number: " + loc("shelfNumber").toString
+      ret
+    }
   }
 }
