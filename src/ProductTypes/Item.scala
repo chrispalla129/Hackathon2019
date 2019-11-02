@@ -1,6 +1,8 @@
 package ProductTypes
 
-class Item {
+import play.api.libs.json.JsValue
+
+class Item (json: JsValue) {
   val name: String = new String
 
   val price: Double = new Double
