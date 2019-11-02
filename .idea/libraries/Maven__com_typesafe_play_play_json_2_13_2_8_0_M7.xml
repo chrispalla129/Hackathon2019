@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.typesafe.play:play-json_2.13:2.8.0-M7">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/typesafe/play/play-json_2.13/2.8.0-M7/play-json_2.13-2.8.0-M7.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/typesafe/play/play-json_2.13/2.8.0-M7/play-json_2.13-2.8.0-M7-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/typesafe/play/play-json_2.13/2.8.0-M7/play-json_2.13-2.8.0-M7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
