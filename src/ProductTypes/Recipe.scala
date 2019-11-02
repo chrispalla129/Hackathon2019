@@ -38,4 +38,5 @@ class Recipe(User: User) {
   val queryBuilder = new QueryOptions.Builder(environ.getEnvironmentId, collect.getCollectionId)
   queryBuilder.query("{field}:{value}")
   val queryResponse: QueryResponse = discovery.query(queryBuilder.build).execute.getResult
+
 }
