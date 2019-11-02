@@ -5,6 +5,13 @@
     <url>http://maven.apache.org</url>
     <version>0.0.1</version>
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.typesafe.play/play-json -->
+        <dependency>
+            <groupId>com.typesafe.play</groupId>
+            <artifactId>play-json_2.13</artifactId>
+            <version>2.8.0-M7</version>
+        </dependency>
+
         <!-- Dependencies for Scalatest from http://www.scalatest.org/install -->
         <dependency>
             <groupId>org.scalactic</groupId>
@@ -17,11 +24,8 @@
             <version>3.0.8</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.ibm.watson</groupId>
-            <artifactId>ibm-watson</artifactId>
-            <version>8.0.0</version>
-        </dependency>
-        <!-- Dependencies for Discovery -->
+        <!-- https://mvnrepository.com/artifact/com.typesafe.play/play-json -->
+
+
     </dependencies>
 </project>
