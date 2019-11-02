@@ -1,0 +1,5 @@
+package ProductTypes
+
+class ShoppingList {
+
+}
