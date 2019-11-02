@@ -1,11 +1,8 @@
 package ProductTypes
 import com.ibm.cloud.sdk.core.security.IamAuthenticator
 import com.ibm.watson.discovery.v1.Discovery
-import com.ibm.watson.discovery.v1.model.CreateEnvironmentOptions
-import com.ibm.watson.discovery.v1.model.Environment
+import com.ibm.watson.discovery.v1.model._
 import com.ibm.cloud.sdk.core.http.HttpMediaType
-import com.ibm.watson.discovery.v1.model.AddDocumentOptions
-import com.ibm.watson.discovery.v1.model.DocumentAccepted
 import java.io.ByteArrayInputStream
 import java.io.InputStream
 import Users._
@@ -38,4 +35,10 @@ class Recipe(User: User) {
 //  builder.file(documentStream)
 //  builder.fileContentType(HttpMediaType.APPLICATION_JSON)
 //  val response: DocumentAccepted = discovery.addDocument(builder.build).execute.getResult
+
+
+
+  val queryBuilder = new QueryOptions.Builder(environmentId, collectionId)
+  queryBuilder.query("{field}:{value}")
+  val queryResponse: QueryResponse = discovery.query(queryBuilder.build).execute.getResult
 }
