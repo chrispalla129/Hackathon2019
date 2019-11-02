@@ -1,6 +1,6 @@
 package Users
 
 abstract class User {
-  def userType:String
-
+  abstract def userType:String
+  abstract def storeNum: Int
 }
