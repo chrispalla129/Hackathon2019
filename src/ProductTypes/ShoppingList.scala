@@ -9,6 +9,7 @@ class ShoppingList {
 
   var cost: Double = {
     var acc = 0
+    0
   }
   def addRecipe(recipe: Recipe): Unit = {
     recipes :+= recipe
