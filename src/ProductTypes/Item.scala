@@ -27,5 +27,4 @@ class Item (json: JsValue, user: Users.User) {
     ret += " Shelf Number: " + loc("shelfNumber").toString
     ret
   }
-
 }
