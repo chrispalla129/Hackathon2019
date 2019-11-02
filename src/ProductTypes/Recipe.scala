@@ -1,5 +1,5 @@
 package ProductTypes
 
-class Recipie {
+class Recipe {
 
 }
