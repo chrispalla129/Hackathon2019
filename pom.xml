@@ -17,5 +17,11 @@
             <version>3.0.8</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.ibm.watson</groupId>
+            <artifactId>ibm-watson</artifactId>
+            <version>8.0.0</version>
+        </dependency>
+        <!-- Dependencies for Discovery -->
     </dependencies>
 </project>
