@@ -6,7 +6,10 @@ class ShoppingList {
 
   var items: List[Item] = List()
 
-  val cost: Int = 0 // sum of all cost
+  var cost: Double = {
+    var acc = 0
+
+  }
   def addRecipe(recipe: Recipe): Unit = {
     recipes :+= recipe
 
