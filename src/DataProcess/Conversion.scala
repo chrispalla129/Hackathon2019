@@ -1,6 +1,6 @@
 package DataProcess
 
-import ProductTypes.Item
+import ProductTypes.{Item, Recipe, ShoppingList}
 import play.api.libs.json.{JsArray, JsNumber, JsString, JsValue, Json}
 
 import scala.collection.mutable
@@ -15,29 +15,48 @@ object Conversion {
       "ingredients" -> Json.arr(item.ingredients)
     ))
   }
-  def itemListToJson(cItems: mutable.Map[String, Item]): String = {
-    var jList: ArrayBuffer[JsValue] = ArrayBuffer.empty
-
-    for(i <- cItems.values) {
-      jList += Json.obj(
-        "sku" -> JsString(i.sku),
-        "name" -> JsString(i.name),
-        "price" -> JsNumber(i.price),
-        "ingredients" -> Json.arr(i.ingredients)
+  def stackItemToJson(sItem: List[(Int,Item)]): String ={
+    var sList: ArrayBuffer[JsValue] = ArrayBuffer.empty
+    for((i, j) <- sItem){
+      sList += Json.obj(
+        "quantity" -> JsNumber(i),
+        "item" -> JsString(itemToJson(j))
       )
     }
+    return Json.stringify(JsArray(sList))
+  }
+  def itemListToJson(cItems: mutable.Map[String, Item]): String = {
+    var jList: ArrayBuffer[JsValue] = ArrayBuffer.empty
+    for(i <- cItems.values)  jList += JsString(itemToJson(i))
     return Json.stringify(JsArray(jList))
   }
 
-  def recipeToJson(ingredients: List[(Int, Item)]): Unit ={
+  def recipeToJson(recipe: Recipe): String = {
     var rList: ArrayBuffer[JsValue] = ArrayBuffer.empty
-    for((i, j) <- ingredients){
+    for((i, j) <- recipe.ingredients){
       rList += Json.obj(
         "num" -> JsNumber(i),
         "item" -> JsString(itemToJson(j))
       )
     }
+    return Json.stringify(JsArray(rList))
   }
-  def shoplistToJson
+
+  def recipeListToJson(rList: List[Recipe]): String = {
+    var jList: ArrayBuffer[JsValue] = ArrayBuffer.empty
+    for(i <- rList)  jList += JsString(recipeToJson(i))
+    return Json.stringify(JsArray(jList))
+  }
+
+  def shoplistToJson(shoplist: ShoppingList): String = {
+    var rList = recipeListToJson(shoplist.recipes)
+    var iList = stackItemToJson(shoplist.items)
+    return Json.stringify(Json.obj(
+      "name" -> JsString(shoplist.name),
+      "recipes" -> JsString(rList),
+      "items" -> JsString(iList),
+      "cost" -> JsNumber(shoplist.cost)
+    ))
+  }
 
 }

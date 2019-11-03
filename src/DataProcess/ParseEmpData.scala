@@ -37,6 +37,7 @@ object ParseEmpData {
         "ingredients" -> Json.arr(i.ingredients)
       )
     }
+
     println(Json.stringify(JsArray(jList)))
     return Json.stringify(JsArray(jList))
   }
