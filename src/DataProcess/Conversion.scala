@@ -32,8 +32,12 @@ object Conversion {
   def recipeToJson(ingredients: List[(Int, Item)]): Unit ={
     var rList: ArrayBuffer[JsValue] = ArrayBuffer.empty
     for((i, j) <- ingredients){
-
+      rList += Json.obj(
+        "num" -> JsNumber(i),
+        "item" -> JsString(itemToJson(j))
+      )
     }
   }
+  def shoplistToJson
 
 }
