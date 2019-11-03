@@ -7,8 +7,7 @@ import play.api.libs.json.{JsValue, Json}
 object Search {
   //return List[Item]
   def searchProduct(input: String):List[Item] ={
-    val input = "Milk"
-    val url = "https://api.wegmans.io/products/search?query="+ input +"&api-version=2018-10-18&subscription-key=da8f3095e1e94773add7ab4cb71eacc1"
+    val url = "https://api.wegmans.io/products/search?query="+ input +"&api-version=2018-10-18&results=10&subscription-key=da8f3095e1e94773add7ab4cb71eacc1"
     val data = Json.parse(get(url))
     val list = (data \ "results").as[Array[JsValue]]
     val customer = new Customer
