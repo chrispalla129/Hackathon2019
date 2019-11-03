@@ -6,7 +6,8 @@ class Item (json: JsValue, user: Users.User) {
   var sku: String = (json \ "sku").as[Int].toString
 
   var price: Double = {
-    val url = "https://api.wegmans.io/products/" + sku + "/prices?api-version=2018-10-18&subscription-key=68527dbd17d345e18b45513c9a60782a"
+    val url = "https://api.wegmans.io/products/" + sku +
+      "/prices?api-version=2018-10-18&subscription-key=68527dbd17d345e18b45513c9a60782a"
     val data = Json.parse(scala.io.Source.fromURL(url).mkString)
     val stores = (data \ "stores").as[Array[JsValue]]
     for (store <- stores) if (store("store").as[Int] == user.storeNum) price = store("price").as[Double]
