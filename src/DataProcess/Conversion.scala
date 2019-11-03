@@ -29,8 +29,11 @@ object Conversion {
     return Json.stringify(JsArray(jList))
   }
 
-  def recipeToJson(): Unit ={
+  def recipeToJson(ingredients: List[(Int, Item)]): Unit ={
+    var rList: ArrayBuffer[JsValue] = ArrayBuffer.empty
+    for((i, j) <- ingredients){
 
+    }
   }
 
 }
