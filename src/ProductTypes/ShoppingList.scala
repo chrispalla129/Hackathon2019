@@ -17,7 +17,7 @@ class ShoppingList(var name: String) {
   }
 
   def addItem (item: Item): Unit = {
-    items :+= item
+    items :+= (1, item)
     cost += item.price
   }
 }
