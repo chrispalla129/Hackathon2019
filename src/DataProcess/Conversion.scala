@@ -29,5 +29,8 @@ object Conversion {
     return Json.stringify(JsArray(jList))
   }
 
-  def recipieToJson()
+  def recipeToJson(): Unit ={
+
+  }
+
 }
