@@ -31,7 +31,7 @@ class Recipe(json: JsValue, User: Users.User) {
     for (item <- ingredients) acc += item._1 * item._2.price
     acc
   }
-
+//bruh
   var instructions: Map[String, String] = {
     var temp: Map[String, String] = Map()
     val instruct = (json \ "instructions").as[Map[String, JsValue]]
