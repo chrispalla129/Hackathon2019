@@ -3,6 +3,8 @@ package ProductTypes
 import play.api.libs.json.{JsArray, JsObject, JsValue, Json}
 
 class Item (json: JsValue, user: Users.User) {
+  val name: String = json("name").as[String]
+
   var sku: String = (json \ "sku").as[Int].toString
 
   var price: Double = {
@@ -14,10 +16,8 @@ class Item (json: JsValue, user: Users.User) {
     -1
   }
 
-  var ingredients: String = {
-    val fin = (json \ "ingredients").as[Array[String]]
-    fin(0)
-  }
+  var ingredients: Array[String] = (json \ "ingredients").as[Array[String]]
+
 
   var location: String = {
     val url = "https://api.wegmans.io/products/" + sku + "/locations/" +
