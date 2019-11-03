@@ -1,14 +1,38 @@
 package ProductTypes
-import com.ibm.cloud.sdk.core.security.IamAuthenticator
-import com.ibm.watson.discovery.v1.Discovery
+import Users._
+import play.api.libs.json.{JsArray, JsObject, JsValue, Json}
 
-import com.ibm.watson.discovery.v1.Discovery
+import scala.collection.mutable
 
-class Recipe {
+class Recipe(User: User, string: JsValue) {
+  var ingredients: List[(Int, Item)] = {
+    val ingr: Array[JsValue] = Json.arr(string("ingredients")).as[Array[JsValue]]
+    for (item <- ingr) {
+      val num = item("skuQuantity").as[Int]
 
+      val sku: String = item("sku").as[String]
+      val url: String = "https://api.wegmans.io/products/" + sku + "?api-version=2018-10-18"
+      val data = scala.io.Source.fromURL(url).mkString
+      val newItem = new Item(Json.parse(data), User)
+      ingredients :+= (num, newItem)
+    }
+    ingredients
+  }
 
+  val cost: Double = {
+    var acc: Double = 0
+    for (item <- ingredients) acc += item._1 * item._2.price
+    acc
+  }
 
-  val authenticator = new IamAuthenticator("{apikey}")
-  val discovery = new Discovery("{version}", authenticator)
-  discovery.setServiceUrl("{url}")
+  var instructions: Map[String, String] = {
+    Map("Directions" -> string("instructions")("directions").as[String])
+
+    if (string("instructions")("testerTips")!= null) instructions += ("Tester Tips" -> string("instructions")("testerTips").as[String])
+    if (string("instructions")("equipment")!= null) instructions += ("Tester Tips" -> string("instructions")("equipment").as[String])
+    if (string("instructions")("chefTips") != null) instructions += ("Chef Tips" -> string("instructions")("chefTips").as[String])
+    if (string("instructions")("disclaimer") != null) instructions += ("Disclaimer" -> string("instructions")("disclaimer").as[String])
+    instructions
+  }
+
 }
