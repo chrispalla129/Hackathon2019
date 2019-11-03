@@ -3,6 +3,8 @@ package ProductTypes
 import play.api.libs.json.{JsArray, JsObject, JsValue, Json}
 
 class Item (json: JsValue, user: Users.User) {
+  var name : String = json("name").as[String]
+
   var sku: String = json("sku").as[String]
 
   var price: Double = {
