@@ -1,6 +1,6 @@
 package DataProcess
 import ProductTypes.Item
-import Users.User
+import Users._
 import play.api.libs.json.{JsArray, JsNumber, JsObject, JsString, JsValue, Json}
 
 import scala.collection.mutable
