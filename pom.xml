@@ -12,6 +12,13 @@
             <version>2.8.0-M7</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.typesafe.play/play-java-forms -->
+        <dependency>
+            <groupId>com.typesafe.play</groupId>
+            <artifactId>play-java-forms_2.13</artifactId>
+            <version>2.8.0-M6</version>
+        </dependency>
+
         <!-- Dependencies for Scalatest from http://www.scalatest.org/install -->
         <dependency>
             <groupId>org.scalactic</groupId>
