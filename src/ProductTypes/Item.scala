@@ -26,7 +26,7 @@ class Item (json: JsValue, user: Users.User) {
     else {
       val loc = data("locations")
       var ret = "Aisle Name: " + loc("name")
-      if (loc("aisleSide") != Json.toJson(null)) ret += " Aisle Side: " + loc("aisleSide").toString
+      if (loc("aisleSide") != null) ret += " Aisle Side: " + loc("aisleSide").toString
       ret += " Shelf Number: " + loc("shelfNumber").toString
       ret
     }
