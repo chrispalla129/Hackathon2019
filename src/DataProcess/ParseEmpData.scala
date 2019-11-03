@@ -6,8 +6,6 @@ import play.api.libs.json.{JsArray, JsNumber, JsObject, JsString, JsValue, Json}
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
-
-
 object ParseEmpData {
   def addItem(dMap: mutable.Map[String, Item], sku: String, name: String, user: User): Unit ={
     val url = "https://api.wegmans.io/products/" + sku + "?api-version=2018-10-18&Subscription-Key=da8f3095e1e94773add7ab4cb71eacc1"
@@ -31,9 +29,8 @@ object ParseEmpData {
 
     var jList: ArrayBuffer[JsValue] = ArrayBuffer.empty
 
-    var c = 0
     for(i <- cItems.values) {
-      jList(0) = Json.obj(
+      jList += Json.obj(
         "sku" -> JsString(i.sku),
         "name" -> JsString(i.name),
         "price" -> JsNumber(i.price),
