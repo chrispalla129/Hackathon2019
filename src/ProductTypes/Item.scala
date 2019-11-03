@@ -5,17 +5,20 @@ import play.api.libs.json.{JsArray, JsObject, JsValue, Json}
 class Item (json: JsValue, user: Users.User) {
   var sku: String = json("sku").as[String]
 
-  var name: String = json("name").as[String]
-
   var price: Double = {
     val url = "https://api.wegmans.io/products/" + sku + "/prices?api-version=2018-10-18&subscription-key=68527dbd17d345e18b45513c9a60782a"
     val data = Json.parse(scala.io.Source.fromURL(url).mkString)
-    val stores = Json.arr(data("stores")).as[Array[JsValue]]
+    val stores = (data \ "stores").as[Array[JsValue]]
     for (store <- stores) if (store("store").as[Int] == user.storeNum) price = store("price").as[Double]
     -2
   }
 
-  var ingredients: Array[String] = Json.arr(json("ingredients")).as[Array[String]]
+  var ingredients: Array[JsValue] = {
+    val url = "https://api.wegmans.io/products/" + sku + "/prices?api-version=2018-10-18&subscription-key=68527dbd17d345e18b45513c9a60782a"
+    val data = Json.parse(scala.io.Source.fromURL(url).mkString)
+    val ingredients = (data \ "ingredients").as[Array[JsValue]]
+    ingredients
+  }
 
   var location: String = {
     val url = "https://api.wegmans.io/products/" + sku + "/locations/" +
