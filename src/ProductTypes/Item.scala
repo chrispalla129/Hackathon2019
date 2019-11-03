@@ -22,7 +22,7 @@ class Item (json: JsValue, user: Users.User) {
       user.storeNum.toString + "?api-version=2018-10-18&subscription-key=68527dbd17d345e18b45513c9a60782a"
     val data = Json.parse(scala.io.Source.fromURL(url).mkString)
 
-    if (data.as[Map[String, JsValue]].contains("error")) "Not in stock"
+    if (data.as[Map[String, JsValue]].contains("error")) "Sorry! This item is not in stock"
     else {
       val loc = data("locations")
       var ret = "Aisle Name: " + loc("name")
