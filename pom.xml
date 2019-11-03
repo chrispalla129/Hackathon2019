@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0">
     <groupId>edu.buffalo.cse</groupId>
-    <artifactId>hack</artifactId>
+    <artifactId>Test</artifactId>
     <modelVersion>4.0.0</modelVersion>
     <url>http://maven.apache.org</url>
     <version>0.0.1</version>
@@ -24,12 +24,5 @@
             <version>3.0.8</version>
             <scope>test</scope>
         </dependency>
-        <!-- watson api -->
-        <dependency>
-            <groupId>com.ibm.watson</groupId>
-            <artifactId>ibm-watson</artifactId>
-            <version>8.0.0</version>
-        </dependency>
-
     </dependencies>
 </project>
