@@ -1,22 +1,25 @@
 package ProductTypes
 import Users._
-import play.api.libs.json.{JsArray, JsObject, JsValue, Json}
+import play.api.libs.json.{JsArray, JsNull, JsObject, JsValue, Json}
 
 import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
 
-class Recipe(User: User, string: JsValue) {
+class Recipe(json: JsValue, User: Users.User) {
   var ingredients: List[(Int, Item)] = {
-    val ingr: Array[JsValue] = Json.arr(string("ingredients")).as[Array[JsValue]]
+    val ingr: Array[JsValue] = (json \ "ingredients").as[Array[JsValue]]
+    val temp = new ListBuffer[(Int, Item)]
     for (item <- ingr) {
       val num = item("skuQuantity").as[Int]
 
-      val sku: String = item("sku").as[String]
-      val url: String = "https://api.wegmans.io/products/" + sku + "?api-version=2018-10-18"
+      val sku: String = item("sku").as[Int].toString
+      val url: String = "https://api.wegmans.io/products/" + sku +
+        "/?api-version=2018-10-18&subscription-key=da8f3095e1e94773add7ab4cb71eacc1"
       val data = scala.io.Source.fromURL(url).mkString
       val newItem = new Item(Json.parse(data), User)
-      ingredients :+= (num, newItem)
+      temp :+ (num, newItem)
     }
-    ingredients
+    temp.toList
   }
 
   val cost: Double = {
@@ -26,13 +29,21 @@ class Recipe(User: User, string: JsValue) {
   }
 
   var instructions: Map[String, String] = {
-    Map("Directions" -> string("instructions")("directions").as[String])
-
-    if (string("instructions")("testerTips")!= null) instructions += ("Tester Tips" -> string("instructions")("testerTips").as[String])
-    if (string("instructions")("equipment")!= null) instructions += ("Tester Tips" -> string("instructions")("equipment").as[String])
-    if (string("instructions")("chefTips") != null) instructions += ("Chef Tips" -> string("instructions")("chefTips").as[String])
-    if (string("instructions")("disclaimer") != null) instructions += ("Disclaimer" -> string("instructions")("disclaimer").as[String])
-    instructions
+    var temp: Map[String, String] = Map()
+    val instruct = (json \ "instructions").as[Map[String, JsValue]]
+    if (instruct.contains("testerTips") && instruct("testerTips")!=JsNull) {
+      temp += ("Tester Tips" -> instruct("testerTips").as[String])
+    }
+    if (instruct.contains("equipment") && instruct("equipment")!=JsNull) {
+      temp += ("Equipment" -> instruct("equipment").as[String])
+    }
+    if (instruct.contains("chefTips") && instruct("chefTips")!=JsNull) {
+      temp += ("Chef Tips" -> instruct("chefTips").as[String])
+    }
+    if (instruct.contains("disclaimer") && instruct("disclaimer")!=JsNull) {
+      temp += ("Disclaimer" -> instruct("disclaimer").as[String])
+    }
+    temp
   }
 
 }

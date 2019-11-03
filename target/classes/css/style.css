@@ -1,0 +1,24 @@
+/*
+Wegmans brand colors:
+Orange hex: #f7a53f
+Brown hex: #9e5c12
+
+*/
+
+.homepage {
+  height: 80vh;
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ),url(../assets/Wegmans-Store-Front-2.jpg);
+  background-size: cover;
+  background-position: center;
+}
+.home-caption {
+  color: white;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 40%;
+}
+#body.customer-body {
+  background-color: #f7a53f;
+}
