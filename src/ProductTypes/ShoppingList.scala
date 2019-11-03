@@ -1,6 +1,7 @@
 package ProductTypes
 
-class ShoppingList(var name: String) {
+class ShoppingList {
+  var name:String = _
 
   var recipes: List[Recipe] = List()
 
@@ -19,5 +20,11 @@ class ShoppingList(var name: String) {
   def addItem (item: Item): Unit = {
     items :+= (1, item)
     cost += item.price
+  }
+
+  def clear(): Unit = {
+    recipes =  List()
+    items =  List()
+    cost = 0
   }
 }
