@@ -1,7 +1,6 @@
 package ProductTypes
 
-class ShoppingList {
-  var name: String = _
+class ShoppingList(var name: String) {
 
   var recipes: List[Recipe] = List()
 
