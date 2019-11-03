@@ -11,7 +11,7 @@ class Item (json: JsValue, user: Users.User) {
     val data = Json.parse(scala.io.Source.fromURL(url).mkString)
     val stores = (data \ "stores").as[Array[JsValue]]
     for (store <- stores) if (store("store").as[Int] == user.storeNum) price = store("price").as[Double]
-    -1
+    price
   }
 
   var ingredients: String = {
