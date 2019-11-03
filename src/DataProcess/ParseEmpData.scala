@@ -24,7 +24,7 @@ object ParseEmpData {
     addItem(cItems, "788204", "Espresso", user)
     cItems("Espresso").price = -1
     cItems("Espresso").sku = ""                                                           //Done manually as there is no data for employee-only items.
-    cItems("Espresso").ingredients = Array.empty
+    cItems("Espresso").ingredients = ""
     cItems("Espresso").location = "Kept under the espresso machine, more is in the back on the coffee shelf."
 
     var jList: ArrayBuffer[JsValue] = ArrayBuffer.empty
