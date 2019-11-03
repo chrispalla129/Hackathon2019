@@ -7,19 +7,23 @@ import scala.collection.mutable.ListBuffer
 
 class Recipe(json: JsValue, User: Users.User) {
   var ingredients: List[(Int, Item)] = {
-    val ingr: Array[JsValue] = (json \ "ingredients").as[Array[JsValue]]
-    val temp = new ListBuffer[(Int, Item)]
-    for (item <- ingr) {
-      val num = item("skuQuantity").as[Int]
+    val itemId = json("id").toString().replaceAll("\"","")
+    val url: String = "https://api.wegmans.io/meals/recipes/" + itemId +
+      "/?api-version=2018-10-18&subscription-key=da8f3095e1e94773add7ab4cb71eacc1"
+    val data = scala.io.Source.fromURL(url).mkString
 
-      val sku: String = item("sku").as[Int].toString
+    val items = Json.parse(data)("ingredients").as[Array[JsValue]]
+    var temp: List [(Int, Item)] = List()
+    for (item <- items) {
+      val num = item("skuQuantity").as[Int]
+      val sku: String = item("sku").as[Int].toString.replace("\"","")
       val url: String = "https://api.wegmans.io/products/" + sku +
         "/?api-version=2018-10-18&subscription-key=da8f3095e1e94773add7ab4cb71eacc1"
       val data = scala.io.Source.fromURL(url).mkString
       val newItem = new Item(Json.parse(data), User)
-      temp :+ (num, newItem)
+      temp :+= (num, newItem)
     }
-    temp.toList
+    temp
   }
 
   val cost: Double = {

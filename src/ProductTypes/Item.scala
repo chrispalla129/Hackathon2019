@@ -1,6 +1,6 @@
 package ProductTypes
 
-import play.api.libs.json.{JsArray, JsNumber, JsObject, JsValue, Json}
+import play.api.libs.json.{JsArray, JsNull, JsNumber, JsObject, JsValue, Json}
 
 class Item (json: JsValue, user: Users.User) {
   val name: String = json("name").as[String]
@@ -36,8 +36,8 @@ class Item (json: JsValue, user: Users.User) {
     else if(mapped("locations").as[Array[Map[String,JsValue]]].nonEmpty){
       val loc = mapped("locations")(0).as[Map[String, JsValue]]
       var ret = "Aisle Name: " + loc("name").toString
-      if (loc("aisleSide") != null) ret += " Aisle Side: " + loc("aisleSide").toString
-      ret += " Shelf Number: " + loc("shelfNumber").toString
+      if (loc("aisleSide") != JsNull) ret += " Aisle Side: " + loc("aisleSide").toString
+      if (loc("shelfNumber") != JsNull)ret += " Shelf Number: " + loc("shelfNumber").toString
       ret
     }
     else ""

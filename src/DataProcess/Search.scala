@@ -27,7 +27,7 @@ object Search {
     var ret: List[Recipe] = List()
 
     for(i<-list){
-      val j = new Recipe(customer, i)
+      val j = new Recipe(i, customer)
       ret :+= j
     }
     ret
