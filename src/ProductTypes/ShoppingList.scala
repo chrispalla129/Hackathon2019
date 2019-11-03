@@ -1,6 +1,7 @@
 package ProductTypes
 
 class ShoppingList {
+  var name: String = _
 
   var recipes: List[Recipe] = List()
 
@@ -8,6 +9,7 @@ class ShoppingList {
 
   var cost: Double = {
     var acc = 0
+    0
   }
   def addRecipe(recipe: Recipe): Unit = {
     recipes :+= recipe
